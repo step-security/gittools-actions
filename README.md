@@ -10,7 +10,7 @@ GitHub Actions that allow the setup and use of the [GitVersion](https://github.c
 [![Release Build Status](https://github.com/step-security/gittools-actions/workflows/release/badge.svg)](https://github.com/step-security/gittools-actions/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GitTools_actions&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=GitTools_actions)
 
-[![GitHub Release](https://img.shields.io/github/v/release/gittools/actions?logo=github&sort=semver)](https://github.com/step-security/gittools-actions/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/step-security/gittools-actions?logo=github&sort=semver)](https://github.com/step-security/gittools-actions/releases/latest)
 
 [![Github Action][gh-actions-badge]][gh-actions]
 [![Azure Pipelines Task][az-pipeline-task-badge]][az-pipeline-task]
@@ -127,7 +127,7 @@ When contributing to this project, please follow these guidelines for creating p
 
 1. **Fork and Clone**
     - Fork the repository to your GitHub account
-    - Clone your fork locally: `git clone https://github.com/YOUR-USERNAME/actions.git`
+    - Clone your fork locally: `git clone https://github.com/YOUR-USERNAME/gittools-actions.git`
     - Add upstream remote: `git remote add upstream https://github.com/step-security/gittools-actions.git`
 
 2. **Create a Feature Branch**

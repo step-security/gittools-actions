@@ -1,6 +1,6 @@
 name: GitTools
 description: Build tasks for easy semantic versioning for projects using Git and release management.
-author: GitTools
+author: 'step-security'
 branding:
   color: gray-dark
   icon: git-pull-request

@@ -8,19 +8,19 @@ You must also run the GitVersion Setup step before the Command step:
 ```yaml
 steps:
   - name: Checkout
-    uses: actions/checkout@v6
+    uses: actions/checkout@v7
     with:
       fetch-depth: 0
 
   - name: Install GitVersion
-    uses: gittools/actions/gitversion/setup@v4.7.0
+    uses: step-security/gittools-actions/gitversion/setup@v4
     with:
       versionSpec: '6.8.x'
 ```
 
 These steps are omitted from the examples for brevity.
 
-> The examples use version _4.7.0_ of the GitVersion Command action.  It is recommended to use the latest released version in your own workflows.
+> The examples use version _v4_ of the GitVersion Command action (major version tag).  It is recommended to use the latest released version in your own workflows.
 
 ## Inputs
 
@@ -56,10 +56,10 @@ verbosity:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Display GitVersion config
-    uses: gittools/actions/gitversion/command@v4.7.0
+    uses: step-security/gittools-actions/gitversion/command@v4
     with:
       arguments: '/showConfig'
 ```
@@ -73,10 +73,10 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Output the FullSemVer variable
-    uses: gittools/actions/gitversion/command@v4.7.0
+    uses: step-security/gittools-actions/gitversion/command@v4
     with:
       arguments: '/showvariable FullSemVer'
 ```
@@ -90,10 +90,10 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Output the formatted version
-    uses: gittools/actions/gitversion/command@v4.7.0
+    uses: step-security/gittools-actions/gitversion/command@v4
     with:
       arguments: '/format {Major}.{Minor}' # any Output Variable can be used here
 ```
@@ -107,10 +107,10 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Display GitVersion config
-    uses: gittools/actions/gitversion/command@v4.7.0
+    uses: step-security/gittools-actions/gitversion/command@v4
     with:
       arguments: '/showConfig'
       verbosity: 'minimal'

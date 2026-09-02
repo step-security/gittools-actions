@@ -8,19 +8,19 @@ You must also run the GitVersion Setup step before the Execute step:
 ```yaml
 steps:
   - name: Checkout
-    uses: actions/checkout@v6
+    uses: actions/checkout@v7
     with:
       fetch-depth: 0
 
   - name: Install GitVersion
-    uses: gittools/actions/gitversion/setup@v4.7.0
+    uses: step-security/gittools-actions/gitversion/setup@v4
     with:
       versionSpec: '6.8.x'
 ```
 
 These steps are omitted from the examples for brevity.
 
-> The examples use version _4.7.0_ of the GitVersion Execute action.  It is recommended to use the latest released version in your own workflows.
+> The examples use version _v4_ of the GitVersion Execute action (major version tag).  It is recommended to use the latest released version in your own workflows.
 
 ## Inputs
 
@@ -127,11 +127,11 @@ The Execute GitVersion action creates the following outputs:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
 ```
 
 </details>
@@ -145,7 +145,7 @@ steps:
 steps:
   - name: Determine Version
     id: version_step # step id used as reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
 ```
 
 Example contents of **GitVersion.yml**:
@@ -168,11 +168,11 @@ branches:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       configFilePath: VersionConfig.yml
 ```
@@ -186,11 +186,11 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       disableCache: true
       disableNormalization: true
@@ -205,10 +205,10 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       updateAssemblyInfo: true
 ```
@@ -222,11 +222,11 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       overrideConfig: |
         semantic-version-format=Loose
@@ -242,11 +242,11 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       updateProjectFiles: true
 ```
@@ -260,11 +260,11 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       updateWixVersionFile: true
 ```
@@ -278,11 +278,11 @@ steps:
 
 ```yaml
 steps:
-  # gittools/actions/gitversion/setup@v4.7.0 action omitted for brevity.
+  # step-security/gittools-actions/gitversion/setup@v4 action omitted for brevity.
 
   - name: Determine Version
     id: version_step # step id used as a reference for output values
-    uses: gittools/actions/gitversion/execute@v4.7.0
+    uses: step-security/gittools-actions/gitversion/execute@v4
     with:
       verbosity: 'minimal'
 ```
@@ -308,18 +308,18 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v4.7.0
+        uses: step-security/gittools-actions/gitversion/setup@v4
         with:
           versionSpec: '6.8.x'
 
       - name: Determine Version
         id: version_step # step id used as a reference for output values
-        uses: gittools/actions/gitversion/execute@v4.7.0
+        uses: step-security/gittools-actions/gitversion/execute@v4
 
       - run: |
           echo "FullSemVer (env.fullSemVer)            : ${{ env.fullSemVer }}"
@@ -398,18 +398,18 @@ jobs:
       GitVersion_FullSemVer: ${{ steps.version_step.outputs.GitVersion_FullSemVer }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v4.7.0
+        uses: step-security/gittools-actions/gitversion/setup@v4
         with:
           versionSpec: '6.8.x'
 
       - name: Determine Version
         id: version_step # step id used as a reference for output values
-        uses: gittools/actions/gitversion/execute@v4.7.0
+        uses: step-security/gittools-actions/gitversion/execute@v4
 
   GitVersion_v6_cross_job_consumer_without_prefix:
     name: GitVersion v6 (cross job consumer) - without prefix
