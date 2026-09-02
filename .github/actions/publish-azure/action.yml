@@ -1,0 +1,40 @@
+name: 'Publish Azure Extension'
+description: 'Publish Azure Extension to Marketplace'
+inputs:
+  mode:
+    description: 'Release mode'
+    required: true
+  major:
+    description: 'Major version'
+    required: true
+  minor:
+    description: 'Minor version'
+    required: true
+  patch:
+    description: 'Patch version'
+    required: true
+  token:
+    description: 'Token for Azure DevOps'
+    required: true
+
+outputs:
+  vsix:
+    description: 'Path to the generated VSIX file'
+    value: ${{ steps.publish-azure.outputs.vsix }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Publish Azure extension
+      id: publish-azure
+      shell: pwsh
+      env:
+        MODE: ${{ inputs.mode }}
+        MAJOR: ${{ inputs.major }}
+        MINOR: ${{ inputs.minor }}
+        PATCH: ${{ inputs.patch }}
+        TFX_TOKEN: ${{ inputs.token }}
+      run: |
+        . .\utilities.ps1 # Import the functions
+
+        publish-vsix -mode $env:MODE -token $env:TFX_TOKEN -major $env:MAJOR -minor $env:MINOR -patch $env:PATCH

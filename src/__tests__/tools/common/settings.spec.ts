@@ -1,0 +1,47 @@
+import { describe, it } from 'vitest'
+import { type IBuildAgent } from '@agents/common'
+import { SettingsProvider, type SetupSettings } from '@tools/common'
+import { expectValidSettings } from './utils'
+
+describe('SettingsProvider', () => {
+    it('should return SetupSettings', () => {
+        const settings: SetupSettings = {
+            versionSpec: '6.8.x',
+            includePrerelease: false,
+            ignoreFailedSources: true,
+            preferLatestVersion: false
+        }
+
+        const buildAgent = {
+            getInput: (input: keyof SetupSettings) => settings[input] as string,
+            getBooleanInput: (input: keyof SetupSettings) => settings[input] as boolean
+        } as IBuildAgent
+
+        const settingsProvider = new SettingsProvider(buildAgent)
+
+        const setupSettings = settingsProvider.getSetupSettings()
+
+        expectValidSettings(settings, setupSettings)
+    })
+
+    it('should return SetupSettings with nugetConfigPath', () => {
+        const settings: SetupSettings = {
+            versionSpec: '6.8.x',
+            includePrerelease: false,
+            ignoreFailedSources: false,
+            preferLatestVersion: false,
+            nugetConfigPath: '/path/to/nuget.config'
+        }
+
+        const buildAgent = {
+            getInput: (input: keyof SetupSettings) => settings[input] as string,
+            getBooleanInput: (input: keyof SetupSettings) => settings[input] as boolean
+        } as IBuildAgent
+
+        const settingsProvider = new SettingsProvider(buildAgent)
+
+        const setupSettings = settingsProvider.getSetupSettings()
+
+        expectValidSettings(settings, setupSettings)
+    })
+})
