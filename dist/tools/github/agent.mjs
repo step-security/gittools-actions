@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import { BuildAgentBase } from "../libs/agents.mjs";
 import * as os from "node:os";
 import process$1 from "node:process";

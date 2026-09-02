@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import { ArgumentsBuilder, DotnetTool, RunnerBase, SettingsProvider } from "./tools.mjs";
 import * as path from "node:path";
 //#region src/tools/gitreleasemanager/settings.ts

@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import { __toESM } from "../rolldown-runtime.mjs";
 import { require_semver } from "./semver.mjs";
 import * as path from "node:path";

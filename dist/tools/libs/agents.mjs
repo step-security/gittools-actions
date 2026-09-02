@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import * as process$2 from "node:process";
 import { execFile } from "node:child_process";
 import * as fs from "node:fs/promises";

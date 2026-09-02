@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import { __commonJSMin } from "../rolldown-runtime.mjs";
 //#region node_modules/semver/internal/constants.js
 var require_constants = /* @__PURE__ */ __commonJSMin(((exports, module) => {

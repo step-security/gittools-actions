@@ -7,14 +7,10 @@ on:
   push:
     branches:
       - main
-      - vnext
-      - 'fix/*'
-      - 'feature/*'
 
   pull_request:
     branches:
       - main
-      - vnext
 
   workflow_dispatch:
 
@@ -29,57 +25,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-2025-vs2026, ubuntu-24.04, macos-26 ]
+        os: ${{ github.actor == 'dependabot[bot]' && fromJSON('["ubuntu-24.04"]') || fromJSON('["windows-2025-vs2026", "ubuntu-24.04", "macos-26"]') }}
       fail-fast: false
     steps:
       - name: Checkout
-        uses: gittools/cicd/checkout@v5
+        uses: actions/checkout@v7
         with:
-          op_service_account_token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           fetch-depth: 0
-
-      - run: |
-          npm install --ignore-scripts
-        name: Install dependencies
-
-      - run: |
-          npm run lint:check &&
-          npm run typecheck &&
-          npm run format:check &&
-          npm run mdlint:check
-        name: Check code quality
-
-      - run: |
-          npm run build
-        name: Build code
-
-      - run: |
-          npm run test:ci
-        name: Run tests
-
-      - name: Test Summary
-        uses: test-summary/action@v2
-        if: always()
-        with:
-          paths: junit-report.xml
 
       - name: gitversion/setup
         uses: ./gitversion/setup
         with:
           versionSpec: '6.8.x'
-          nugetConfigPath: '${{ github.workspace }}/nuget.config'
-
-      - name: gitversion/command (showvariable)
-        uses: ./gitversion/command
-        with:
-          targetPath: './'
-          arguments: '/showvariable FullSemVer'
-
-      - name: gitversion/command (format)
-        uses: ./gitversion/command
-        with:
-          targetPath: './'
-          arguments: '/format {Major}.{Minor}'
 
       - name: gitversion/execute
         id: gitversion # step id used as a reference for output values
@@ -113,8 +70,3 @@ jobs:
           echo "FullSemVer (steps.gitversion.outputs.GitVersion_FullSemVer) : ${{ steps.gitversion.outputs.GitVersion_FullSemVer }}"
         name: Use variables and output
 
-      - uses: gittools/cicd/git-commit-push@v5
-        if: matrix.os == 'ubuntu-24.04'
-        with:
-          message: 'dist update'
-        name: Rebuild dist and push

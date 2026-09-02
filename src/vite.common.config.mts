@@ -20,6 +20,7 @@ export function viteConfig(entry: Record<string, string>, manualChunks: (id: str
             rollupOptions: {
                 external: [...builtinModules, ...builtinModules.map(module => `node:${module}`)],
                 output: {
+                    banner: `import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);`,
                     entryFileNames: '[name].mjs',
                     chunkFileNames: chunkInfo => {
                         if (chunkInfo.name === 'rolldown-runtime') {

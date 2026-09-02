@@ -1,3 +1,5 @@
+import { createRequire } from "node:module";
+createRequire(import.meta.url);
 import { ArgumentsBuilder, DotnetTool, RunnerBase, SettingsProvider, keysOf } from "./tools.mjs";
 import { allIndexesOf } from "../lib.mjs";
 import * as path from "node:path";
