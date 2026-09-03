@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
+    "types": ["node", "vite/client"],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@lib": ["./src/tools/lib.ts"],
+      "@agents/common": ["./src/agents/common"],
+      "@agents/azure": ["./src/agents/azure"],
+      "@agents/local": ["./src/agents/local"],
+      "@agents/github": ["./src/agents/github"],
+      "@tools/common": ["./src/tools/common"],
+      "@tools/gitreleasemanager": ["./src/tools/gitreleasemanager"],
+      "@tools/gitversion": ["./src/tools/gitversion"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.mts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

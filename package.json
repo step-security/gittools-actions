@@ -1,0 +1,61 @@
+{
+  "name": "gittools-actions",
+  "version": "4.7.0",
+  "description": "Easy Semantic Versioning (https://semver.org) for projects using Git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-security/gittools-actions.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "run-p build:tools build:agent:github",
+    "lint:check": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "format:check": "prettier --check \"src/**/*.ts\"",
+    "format:fix": "prettier --write \"src/**/*.ts\"",
+    "mdlint:check": "markdownlint **/*.md",
+    "mdlint:fix": "markdownlint --fix **/*.md",
+
+    "build:tools": "vite build --config src/tools/vite.config.mts",
+    "build:agent:github": "vite build --config src/agents/vite.config.mts --mode github",
+
+    "run:github:gitversion": "node dist/tools/cli.mjs --tool gitversion --agent github",
+
+    "test:ci": "vitest --run src/__tests__ --config src/__tests__/vitest.config.ts",
+    "test:tools": "vitest --run src/__tests__/tools --config src/__tests__/vitest.config.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/node": "26.4.0",
+    "@types/semver": "7.8.0",
+    "@vitest/eslint-plugin": "1.6.27",
+    "eslint": "10.9.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.6",
+    "glob": "13.0.6",
+    "globals": "17.11.0",
+    "markdownlint-cli": "0.49.1",
+    "npm-run-all2": "9.0.3",
+    "prettier": "3.9.6",
+    "simple-git": "3.36.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.68.0",
+    "vite": "8.2.2",
+    "vitest": "4.1.11"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "axios": "^1.20.0",
+    "semver": "7.8.5"
+  },
+  "lint-staged": {
+    "*.ts": ["eslint --fix", "prettier --write"],
+    "*.md": ["markdownlint --fix"]
+  }
+}

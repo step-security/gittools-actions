@@ -1,0 +1,72 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ${{ github.actor == 'dependabot[bot]' && fromJSON('["ubuntu-24.04"]') || fromJSON('["windows-2025-vs2026", "ubuntu-24.04", "macos-26"]') }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: gitversion/setup
+        uses: ./gitversion/setup
+        with:
+          versionSpec: '6.8.x'
+
+      - name: gitversion/execute
+        id: gitversion # step id used as a reference for output values
+        uses: ./gitversion/execute
+        with:
+          targetPath: './'
+          disableCache: true
+          disableNormalization: false
+          overrideConfig: |
+            semantic-version-format=Loose
+
+      - run: |
+          echo "Major      (env.major)                                      : ${{ env.major }}"
+          echo "Major      (env.GitVersion_Major)                           : ${{ env.GitVersion_Major }}"
+          echo "Major      (steps.gitversion.outputs.major)                 : ${{ steps.gitversion.outputs.major }}"
+          echo "Major      (steps.gitversion.outputs.GitVersion_Major)      : ${{ steps.gitversion.outputs.GitVersion_Major }}"
+
+          echo "Minor      (env.minor)                                      : ${{ env.minor }}"
+          echo "Minor      (env.GitVersion_Minor)                           : ${{ env.GitVersion_Minor }}"
+          echo "Minor      (steps.gitversion.outputs.minor)                 : ${{ steps.gitversion.outputs.minor }}"
+          echo "Minor      (steps.gitversion.outputs.GitVersion_Minor)      : ${{ steps.gitversion.outputs.GitVersion_Minor }}"
+
+          echo "Patch      (env.patch)                                      : ${{ env.patch }}"
+          echo "Patch      (env.GitVersion_Patch)                           : ${{ env.GitVersion_Patch }}"
+          echo "Patch      (steps.gitversion.outputs.patch)                 : ${{ steps.gitversion.outputs.patch }}"
+          echo "Patch      (steps.gitversion.outputs.GitVersion_Patch)      : ${{ steps.gitversion.outputs.GitVersion_Patch }}"
+
+          echo "FullSemVer (env.fullSemVer)                                 : ${{ env.fullSemVer }}"
+          echo "FullSemVer (env.GitVersion_FullSemVer)                      : ${{ env.GitVersion_FullSemVer }}"
+          echo "FullSemVer (steps.gitversion.outputs.fullSemVer)            : ${{ steps.gitversion.outputs.fullSemVer }}"
+          echo "FullSemVer (steps.gitversion.outputs.GitVersion_FullSemVer) : ${{ steps.gitversion.outputs.GitVersion_FullSemVer }}"
+        name: Use variables and output
+
