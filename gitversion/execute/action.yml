@@ -1,6 +1,6 @@
 name: gitversion-execute
 description: GitHub Action for Easy Semantic Versioning with GitVersion. Execute GitVersion to obtain version information
-author: GitTools
+author: step-security
 branding:
   color: gray-dark
   icon: git-pull-request
