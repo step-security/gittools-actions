@@ -1,0 +1,13 @@
+# Ignored vulnerabilities — dev-only transitive dependencies not bundled in dist
+
+[[IgnoredVulns]]
+id = "GHSA-3g3m-2fjr-6pw4"
+reason = "glob is a devDependency (ESLint tooling), not bundled in the action dist"
+
+[[IgnoredVulns]]
+id = "GHSA-238p-pmpm-9mq7"
+reason = "katex is a transitive devDependency, not bundled in the action dist"
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+reason = "minimatch is a transitive devDependency, not bundled in the action dist"
